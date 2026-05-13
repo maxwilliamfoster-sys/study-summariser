@@ -30,7 +30,6 @@
 
         .subtitle { color: #64748b; margin-bottom: 2rem; font-size: 0.95rem; }
 
-        /* API Key */
         .api-section {
             background: #1a1d2e;
             border: 1px solid #2d3748;
@@ -71,14 +70,12 @@
             font-size: 0.85rem;
             font-weight: 600;
             cursor: pointer;
-            transition: opacity 0.2s;
-            white-space: nowrap;
             font-family: inherit;
+            white-space: nowrap;
         }
 
         .btn-small:hover { opacity: 0.85; }
 
-        /* Tabs */
         .tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
 
         .tab {
@@ -96,7 +93,6 @@
         .tab:hover { border-color: #6366f1; color: #a5b4fc; }
         .tab.active { background: #6366f1; border-color: #6366f1; color: white; font-weight: 600; }
 
-        /* Input card */
         .input-card {
             background: #1a1d2e;
             border: 1px solid #2d3748;
@@ -104,8 +100,8 @@
             padding: 1.25rem;
         }
 
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
+        .tab-pane { display: none; }
+        .tab-pane.active { display: block; }
 
         textarea {
             width: 100%;
@@ -130,19 +126,15 @@
             padding: 3rem 2rem;
             text-align: center;
             cursor: pointer;
-            transition: all 0.2s;
             color: #64748b;
+            transition: all 0.2s;
         }
 
-        .drop-zone:hover, .drop-zone.drag-over {
-            border-color: #6366f1;
-            background: #1a1d35;
-            color: #a5b4fc;
-        }
-
+        .drop-zone:hover, .drop-zone.drag-over { border-color: #6366f1; background: #1a1d35; color: #a5b4fc; }
         .drop-zone .icon { font-size: 2.5rem; margin-bottom: 0.6rem; }
         .drop-zone strong { color: #a5b4fc; }
         .drop-zone input { display: none; }
+
         .file-status { margin-top: 0.75rem; font-size: 0.85rem; color: #6366f1; min-height: 1.2rem; }
 
         .url-input {
@@ -172,11 +164,10 @@
             font-family: inherit;
             cursor: pointer;
             margin-top: 1rem;
-            transition: opacity 0.2s, transform 0.1s;
+            transition: opacity 0.2s;
         }
 
         .btn-main:hover { opacity: 0.9; }
-        .btn-main:active { transform: scale(0.99); }
         .btn-main:disabled { opacity: 0.4; cursor: not-allowed; }
 
         .error-box {
@@ -190,10 +181,9 @@
             display: none;
         }
 
-        .error-box.visible { display: block; }
+        .error-box.show { display: block; }
         .error-box a { color: #f87171; }
 
-        /* Output card */
         .output-card {
             background: #1a1d2e;
             border: 1px solid #2d3748;
@@ -203,7 +193,7 @@
             display: none;
         }
 
-        .output-card.visible { display: block; }
+        .output-card.show { display: block; }
 
         .loading { text-align: center; padding: 2rem; color: #64748b; }
 
@@ -219,7 +209,15 @@
 
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* Section labels */
+        .result-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            margin-bottom: 1.25rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #2d3748;
+        }
+
         .section-label {
             font-size: 0.75rem;
             font-weight: 700;
@@ -232,7 +230,6 @@
             justify-content: space-between;
         }
 
-        /* Summary */
         .summary-list { list-style: none; padding: 0; }
 
         .summary-list li {
@@ -245,11 +242,9 @@
         }
 
         .summary-list li:last-child { border-bottom: none; }
-        .bullet { color: #6366f1; font-weight: 700; flex-shrink: 0; margin-top: 0.05rem; }
+        .bullet { color: #6366f1; font-weight: 700; flex-shrink: 0; }
 
-        /* Key terms */
         .terms-section { margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid #2d3748; }
-
         .terms-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
         .term-chip {
@@ -262,7 +257,6 @@
             font-weight: 500;
         }
 
-        /* Flashcards */
         .flashcards-section { margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid #2d3748; }
 
         .flashcard-nav {
@@ -319,16 +313,8 @@
             text-align: center;
         }
 
-        .fc-front {
-            background: #1e2337;
-            border: 1px solid #2d3748;
-        }
-
-        .fc-back {
-            background: #1e1b4b;
-            border: 1px solid #3730a3;
-            transform: rotateY(180deg);
-        }
+        .fc-front { background: #1e2337; border: 1px solid #2d3748; }
+        .fc-back { background: #1e1b4b; border: 1px solid #3730a3; transform: rotateY(180deg); }
 
         .fc-label {
             font-size: 0.7rem;
@@ -340,13 +326,10 @@
 
         .fc-front .fc-label { color: #6366f1; }
         .fc-back .fc-label { color: #a78bfa; }
-
         .fc-text { font-size: 0.95rem; line-height: 1.5; color: #e2e8f0; }
         .fc-tap-hint { font-size: 0.75rem; color: #475569; margin-top: 0.5rem; }
 
-        /* Study tips */
         .study-section { margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid #2d3748; }
-
         .study-tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem; }
 
         .study-tip-card {
@@ -360,7 +343,6 @@
         .study-tip-card .tip-title { font-size: 0.85rem; font-weight: 700; color: #a5b4fc; margin-bottom: 0.3rem; }
         .study-tip-card .tip-desc { font-size: 0.82rem; color: #64748b; line-height: 1.5; }
 
-        /* Copy btn */
         .copy-btn {
             padding: 0.25rem 0.65rem;
             background: transparent;
@@ -375,28 +357,36 @@
 
         .copy-btn:hover { border-color: #6366f1; color: #a5b4fc; }
 
-        /* History */
         .history-section {
             margin-top: 2rem;
             border-top: 1px solid #1e2337;
             padding-top: 1.5rem;
+            display: none;
         }
+
+        .history-section.show { display: block; }
 
         .history-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            cursor: pointer;
-            padding: 0.5rem 0;
-            user-select: none;
+            margin-bottom: 1rem;
         }
 
-        .history-title { font-size: 0.85rem; font-weight: 600; color: #64748b; }
-        .history-toggle { font-size: 0.75rem; color: #475569; transition: transform 0.2s; }
-        .history-toggle.open { transform: rotate(180deg); }
+        .history-header h2 { font-size: 1.1rem; font-weight: 700; color: #e2e8f0; }
 
-        .history-list { margin-top: 0.75rem; display: none; }
-        .history-list.open { display: block; }
+        .btn-danger {
+            padding: 0.3rem 0.7rem;
+            background: transparent;
+            border: 1px solid #7f1d1d;
+            border-radius: 6px;
+            color: #f87171;
+            font-size: 0.75rem;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-danger:hover { background: #1a0f0f; }
 
         .history-item {
             display: flex;
@@ -407,18 +397,17 @@
             border: 1px solid #1e2337;
             margin-bottom: 0.5rem;
             cursor: pointer;
-            transition: all 0.15s;
             background: #111318;
+            transition: all 0.15s;
         }
 
         .history-item:hover { border-color: #6366f1; background: #1a1d2e; }
 
         .history-meta { flex: 1; min-width: 0; }
-        .history-preview { font-size: 0.85rem; color: #94a3b8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .history-name { font-size: 0.9rem; font-weight: 600; color: #e2e8f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .history-date { font-size: 0.75rem; color: #475569; margin-top: 0.2rem; }
-        .history-type { font-size: 0.75rem; color: #6366f1; background: #1e1b4b; padding: 0.2rem 0.5rem; border-radius: 4px; white-space: nowrap; }
 
-        .history-delete {
+        .history-del {
             background: none;
             border: none;
             color: #475569;
@@ -426,12 +415,10 @@
             font-size: 1rem;
             padding: 0.2rem 0.4rem;
             border-radius: 4px;
-            transition: color 0.15s;
+            flex-shrink: 0;
         }
 
-        .history-delete:hover { color: #f87171; }
-
-        .history-empty { font-size: 0.85rem; color: #475569; text-align: center; padding: 1.5rem 0; }
+        .history-del:hover { color: #f87171; }
     </style>
 </head>
 <body>
@@ -442,84 +429,77 @@
     <div class="api-section">
         <label>Groq API Key</label>
         <input type="password" id="apiKey" placeholder="gsk_..." />
-        <button class="btn-small" onclick="saveKey(event)">Save</button>
+        <button class="btn-small" id="saveBtn">Save</button>
         <p class="api-hint">
             Don't have a key? <a href="https://console.groq.com/keys" target="_blank">Get one free at console.groq.com →</a>
-            — 100% free, no credit card needed.
+            — no credit card needed.
         </p>
     </div>
 
     <div class="tabs">
-        <button class="tab active" onclick="switchTab('text', this)">📝 Paste Text</button>
-        <button class="tab" onclick="switchTab('pdf', this)">📄 Upload PDF</button>
-        <button class="tab" onclick="switchTab('youtube', this)">▶ YouTube</button>
+        <button class="tab active" data-tab="text">📝 Paste Text</button>
+        <button class="tab" data-tab="pdf">📄 Upload PDF</button>
+        <button class="tab" data-tab="youtube">▶ YouTube</button>
     </div>
 
     <div class="input-card">
-        <div class="tab-content active" id="tab-text">
+        <div class="tab-pane active" id="pane-text">
             <textarea id="textInput" placeholder="Paste your notes, lecture text, article, or any content here..."></textarea>
         </div>
 
-        <div class="tab-content" id="tab-pdf">
-            <div class="drop-zone" id="dropZone"
-                 onclick="document.getElementById('pdfFile').click()"
-                 ondragover="onDragOver(event)"
-                 ondragleave="onDragLeave()"
-                 ondrop="onDrop(event)">
+        <div class="tab-pane" id="pane-pdf">
+            <div class="drop-zone" id="dropZone">
                 <div class="icon">📄</div>
                 <div>Drop your PDF here or <strong>click to browse</strong></div>
                 <div style="font-size:0.8rem;margin-top:0.4rem;color:#475569">Supports .pdf files</div>
-                <input type="file" id="pdfFile" accept=".pdf" onchange="onFileSelect(event)" />
+                <input type="file" id="pdfFile" accept=".pdf" />
             </div>
             <div class="file-status" id="fileStatus"></div>
         </div>
 
-        <div class="tab-content" id="tab-youtube">
+        <div class="tab-pane" id="pane-youtube">
             <input class="url-input" type="text" id="youtubeUrl" placeholder="https://www.youtube.com/watch?v=..." />
-            <p class="hint">Works with videos that have captions. If it fails, use YouTube's "Show transcript" button, copy the text, and paste it in the Text tab instead.</p>
+            <p class="hint">Works with videos that have captions. If it fails, copy the transcript from YouTube and paste it in the Text tab.</p>
         </div>
 
-        <button class="btn-main" id="summariseBtn" onclick="summarise()">✦ Summarise</button>
+        <button class="btn-main" id="summariseBtn">✦ Summarise</button>
     </div>
 
     <div class="error-box" id="errorBox"></div>
 
     <div class="output-card" id="outputCard">
-        <div class="loading" id="loading">
+        <div id="loading" class="loading">
             <div class="spinner"></div>
             <span id="loadingText">Summarising...</span>
         </div>
 
         <div id="result" style="display:none">
-            <!-- Title -->
-            <div id="resultTitle" style="font-size:1.2rem;font-weight:700;color:#e2e8f0;margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:1px solid #2d3748;"></div>
-            <!-- Summary -->
+            <div class="result-title" id="resultTitle"></div>
+
             <div class="section-label">
                 Summary
-                <button class="copy-btn" onclick="copySummary()">Copy</button>
+                <button class="copy-btn" id="copyBtn">Copy</button>
             </div>
             <ul class="summary-list" id="summaryList"></ul>
 
-            <!-- Key Terms -->
             <div class="terms-section">
                 <div class="section-label">Key Terms</div>
                 <div class="terms-grid" id="termsGrid"></div>
             </div>
 
-            <!-- Flashcards -->
             <div class="flashcards-section">
                 <div class="section-label">Flashcards</div>
                 <div class="flashcard-nav">
-                    <button class="btn-nav" id="fcPrev" onclick="fcNavigate(-1)">← Prev</button>
+                    <button class="btn-nav" id="fcPrev">← Prev</button>
                     <span class="fc-counter" id="fcCounter">1 / 1</span>
-                    <button class="btn-nav" id="fcNext" onclick="fcNavigate(1)">Next →</button>
+                    <button class="btn-nav" id="fcNext">Next →</button>
                 </div>
-                <div class="flashcard-wrap" id="flashcard" onclick="flipCard()">
-                    <div class="flashcard-inner" id="flashcardInner">
+                <div class="flashcard-wrap" id="flashcard">
+                    <div class="flashcard-inner">
                         <div class="fc-face fc-front">
                             <div class="fc-label">Question</div>
                             <div class="fc-text" id="fcQuestion"></div>
-                            <div class="fc-tap-hint">tap to reveal answer</div>
+                            <div class="fc-tap-hint">click to reveal answer</div>
                         </div>
                         <div class="fc-face fc-back">
                             <div class="fc-label">Answer</div>
@@ -529,7 +509,6 @@
                 </div>
             </div>
 
-            <!-- Study Tips -->
             <div class="study-section">
                 <div class="section-label">How to Study This</div>
                 <div class="study-tips-grid" id="studyTipsGrid"></div>
@@ -537,155 +516,180 @@
         </div>
     </div>
 
-    <!-- History -->
-    <div class="history-section" id="historySection" style="display:none">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
-            <h2 style="font-size:1.1rem;font-weight:700;color:#e2e8f0;">📚 Saved Summaries</h2>
-            <button class="btn-small" onclick="clearAllHistory()" style="background:#1e2337;color:#f87171;font-size:0.75rem;padding:0.3rem 0.7rem;">Clear all</button>
+    <div class="history-section" id="historySection">
+        <div class="history-header">
+            <h2>📚 Saved Summaries</h2>
+            <button class="btn-danger" id="clearBtn">Clear all</button>
         </div>
         <div id="historyList"></div>
     </div>
 </div>
 
 <script>
-    pdfjsLib.GlobalWorkerOptions.workerSrc =
-        'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-    let currentTab = 'text';
-    let pdfText = '';
-    let flashcards = [];
-    let fcIndex = 0;
+let currentTab = 'text';
+let pdfText = '';
+let flashcards = [];
+let fcIndex = 0;
 
-    // ─── Init ───────────────────────────────────────────────────────────────────
+// ── Init ────────────────────────────────────────────────────────────────────
 
-    window.onload = () => {
-        const saved = localStorage.getItem('groq_api_key');
-        if (saved) document.getElementById('apiKey').value = saved;
-        renderHistory();
-    };
+window.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem('groq_api_key');
+    if (saved) document.getElementById('apiKey').value = saved;
+    renderHistory();
+    bindEvents();
+});
 
-    // ─── API key ────────────────────────────────────────────────────────────────
-
-    function saveKey(e) {
+function bindEvents() {
+    // Save key
+    document.getElementById('saveBtn').addEventListener('click', () => {
         const key = document.getElementById('apiKey').value.trim();
         if (!key) return;
         localStorage.setItem('groq_api_key', key);
-        const btn = e.target;
+        const btn = document.getElementById('saveBtn');
         btn.textContent = 'Saved ✓';
         setTimeout(() => btn.textContent = 'Save', 2000);
-    }
+    });
 
-    // ─── Tabs ────────────────────────────────────────────────────────────────────
+    // Tabs
+    document.querySelectorAll('.tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tab = btn.dataset.tab;
+            currentTab = tab;
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+            document.getElementById('pane-' + tab).classList.add('active');
+            hideError();
+        });
+    });
 
-    function switchTab(tab, el) {
-        currentTab = tab;
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        el.classList.add('active');
-        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-        document.getElementById('tab-' + tab).classList.add('active');
-        hideError();
-    }
+    // Summarise
+    document.getElementById('summariseBtn').addEventListener('click', summarise);
 
-    // ─── Errors ──────────────────────────────────────────────────────────────────
-
-    function showError(msg) {
-        const box = document.getElementById('errorBox');
-        box.innerHTML = msg;
-        box.classList.add('visible');
-        document.getElementById('outputCard').classList.remove('visible');
-    }
-
-    function hideError() {
-        document.getElementById('errorBox').classList.remove('visible');
-    }
-
-    // ─── PDF ─────────────────────────────────────────────────────────────────────
-
-    function onDragOver(e) { e.preventDefault(); document.getElementById('dropZone').classList.add('drag-over'); }
-    function onDragLeave() { document.getElementById('dropZone').classList.remove('drag-over'); }
-
-    function onDrop(e) {
+    // PDF drop zone
+    const dropZone = document.getElementById('dropZone');
+    dropZone.addEventListener('click', () => document.getElementById('pdfFile').click());
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+    dropZone.addEventListener('drop', e => {
         e.preventDefault();
-        document.getElementById('dropZone').classList.remove('drag-over');
+        dropZone.classList.remove('drag-over');
         const file = e.dataTransfer.files[0];
-        if (file?.type === 'application/pdf') loadPDF(file);
+        if (file && file.type === 'application/pdf') loadPDF(file);
         else showError('Please drop a PDF file.');
-    }
+    });
+    document.getElementById('pdfFile').addEventListener('change', e => {
+        if (e.target.files[0]) loadPDF(e.target.files[0]);
+    });
 
-    function onFileSelect(e) { if (e.target.files[0]) loadPDF(e.target.files[0]); }
+    // Flashcard controls
+    document.getElementById('flashcard').addEventListener('click', () => {
+        document.getElementById('flashcard').classList.toggle('flipped');
+    });
+    document.getElementById('fcPrev').addEventListener('click', () => navigate(-1));
+    document.getElementById('fcNext').addEventListener('click', () => navigate(1));
 
-    async function loadPDF(file) {
-        const status = document.getElementById('fileStatus');
-        status.textContent = `Loading ${file.name}...`;
-        try {
-            const pdf = await pdfjsLib.getDocument(await file.arrayBuffer()).promise;
-            let text = '';
-            for (let i = 1; i <= pdf.numPages; i++) {
-                const page = await pdf.getPage(i);
-                const content = await page.getTextContent();
-                text += content.items.map(item => item.str).join(' ') + '\n';
-            }
-            pdfText = text.trim();
-            status.textContent = `✓ ${file.name} — ${pdf.numPages} page${pdf.numPages > 1 ? 's' : ''} loaded`;
-        } catch {
-            status.textContent = '';
-            showError('Could not read the PDF. Make sure it is not password protected.');
+    // Copy summary
+    document.getElementById('copyBtn').addEventListener('click', () => {
+        const items = document.querySelectorAll('#summaryList li span:last-child');
+        const text = Array.from(items).map(el => '• ' + el.textContent).join('\n');
+        navigator.clipboard.writeText(text).then(() => {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = 'Copied!';
+            setTimeout(() => btn.textContent = 'Copy', 2000);
+        });
+    });
+
+    // Clear history
+    document.getElementById('clearBtn').addEventListener('click', () => {
+        if (confirm('Delete all saved summaries?')) {
+            localStorage.removeItem('summariser_history');
+            renderHistory();
         }
+    });
+}
+
+// ── Errors ──────────────────────────────────────────────────────────────────
+
+function showError(msg) {
+    const box = document.getElementById('errorBox');
+    box.innerHTML = msg;
+    box.classList.add('show');
+    document.getElementById('outputCard').classList.remove('show');
+}
+
+function hideError() {
+    document.getElementById('errorBox').classList.remove('show');
+}
+
+// ── PDF ─────────────────────────────────────────────────────────────────────
+
+async function loadPDF(file) {
+    const status = document.getElementById('fileStatus');
+    status.textContent = 'Loading ' + file.name + '...';
+    try {
+        const pdf = await pdfjsLib.getDocument(await file.arrayBuffer()).promise;
+        let text = '';
+        for (let i = 1; i <= pdf.numPages; i++) {
+            const page = await pdf.getPage(i);
+            const content = await page.getTextContent();
+            text += content.items.map(item => item.str).join(' ') + '\n';
+        }
+        pdfText = text.trim();
+        status.textContent = '✓ ' + file.name + ' — ' + pdf.numPages + ' page' + (pdf.numPages > 1 ? 's' : '') + ' loaded';
+    } catch {
+        status.textContent = '';
+        showError('Could not read the PDF. Make sure it is not password protected.');
     }
+}
 
-    // ─── YouTube ─────────────────────────────────────────────────────────────────
+// ── YouTube ──────────────────────────────────────────────────────────────────
 
-    function extractVideoId(url) {
-        const m = url.match(/(?:v=|\/embed\/|\/shorts\/|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
-        return m ? m[1] : null;
-    }
+function getVideoId(url) {
+    const m = url.match(/(?:v=|\/embed\/|\/shorts\/|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+    return m ? m[1] : null;
+}
 
-    const PROXIES = [
-        url => 'https://corsproxy.io/?' + encodeURIComponent(url),
-        url => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url),
-        url => 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(url),
+async function tryFetch(url) {
+    const proxies = [
+        'https://corsproxy.io/?' + encodeURIComponent(url),
+        'https://api.allorigins.win/raw?url=' + encodeURIComponent(url),
+        'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(url),
     ];
-
-    async function fetchWithFallback(targetUrl) {
-        for (const proxy of PROXIES) {
-            try {
-                const res = await fetch(proxy(targetUrl));
-                if (res.ok) return res;
-            } catch {}
-        }
-        return null;
+    for (const p of proxies) {
+        try {
+            const res = await fetch(p);
+            if (res.ok) return res;
+        } catch {}
     }
+    return null;
+}
 
-    async function fetchYouTubeTranscript(url) {
-        const videoId = extractVideoId(url);
-        if (!videoId) throw new Error('Invalid YouTube URL — please check the link.');
+async function getYouTubeTranscript(url) {
+    const videoId = getVideoId(url);
+    if (!videoId) throw new Error('Invalid YouTube URL — please check the link.');
 
-        // Method 1: fetch YouTube page and extract caption track list
-        setLoadingText('Fetching video transcript...');
-        let tracks = null;
+    setLoading('Fetching transcript...');
 
-        const pageRes = await fetchWithFallback(`https://www.youtube.com/watch?v=${videoId}`);
-        if (pageRes) {
-            try {
-                const html = await pageRes.text();
-                const match = html.match(/ytInitialPlayerResponse\s*=\s*(\{.+?\})\s*;/s);
-                if (match) {
-                    const playerData = JSON.parse(match[1]);
-                    tracks = playerData?.captions?.playerCaptionsTracklistRenderer?.captionTracks;
-                }
-            } catch {}
-        }
-
-        // Method 2: try YouTube timedtext API directly if we couldn't get tracks
-        if (!tracks?.length) {
-            setLoadingText('Trying alternative transcript method...');
-            try {
-                const timedRes = await fetchWithFallback(
-                    `https://www.youtube.com/api/timedtext?v=${videoId}&lang=en&fmt=json3`
-                );
-                if (timedRes) {
-                    const data = await timedRes.json();
-                    if (data?.events?.length) {
+    // Try fetching the page and extracting caption tracks
+    const pageRes = await tryFetch('https://www.youtube.com/watch?v=' + videoId);
+    if (pageRes) {
+        try {
+            const html = await pageRes.text();
+            const match = html.match(/ytInitialPlayerResponse\s*=\s*(\{.+?\})\s*;/s);
+            if (match) {
+                const playerData = JSON.parse(match[1]);
+                const tracks = playerData?.captions?.playerCaptionsTracklistRenderer?.captionTracks;
+                if (tracks && tracks.length) {
+                    setLoading('Downloading captions...');
+                    const track = tracks.find(t => t.languageCode === 'en') || tracks[0];
+                    const capRes = await tryFetch(track.baseUrl + '&fmt=json3');
+                    if (capRes) {
+                        const data = await capRes.json();
                         const text = data.events
                             .filter(e => e.segs)
                             .flatMap(e => e.segs.map(s => s.utf8))
@@ -693,270 +697,236 @@
                         if (text) return text;
                     }
                 }
-            } catch {}
-
-            throw new Error('Could not get transcript automatically. On YouTube, click the three dots next to Like/Share, choose "Show transcript", copy the text, and paste it in the Text tab.');
-        }
-
-        // Download the caption track
-        setLoadingText('Downloading captions...');
-        const track = tracks.find(t => t.languageCode === 'en') || tracks[0];
-        const captionRes = await fetchWithFallback(track.baseUrl + '&fmt=json3');
-
-        if (!captionRes) throw new Error('Could not download captions. Try pasting the transcript manually in the Text tab.');
-
-        const transcriptData = await captionRes.json();
-        const text = transcriptData.events
-            .filter(e => e.segs)
-            .flatMap(e => e.segs.map(s => s.utf8))
-            .join(' ').replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
-
-        if (!text) throw new Error('Transcript appears to be empty.');
-        return text;
+            }
+        } catch {}
     }
 
-    function setLoadingText(msg) { document.getElementById('loadingText').textContent = msg; }
+    // Fallback: try timedtext API directly
+    setLoading('Trying alternate method...');
+    const timedRes = await tryFetch('https://www.youtube.com/api/timedtext?v=' + videoId + '&lang=en&fmt=json3');
+    if (timedRes) {
+        try {
+            const data = await timedRes.json();
+            if (data && data.events) {
+                const text = data.events
+                    .filter(e => e.segs)
+                    .flatMap(e => e.segs.map(s => s.utf8))
+                    .join(' ').replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
+                if (text) return text;
+            }
+        } catch {}
+    }
 
-    // ─── Summarise ───────────────────────────────────────────────────────────────
+    throw new Error('Could not get the transcript automatically. On YouTube, click the three dots next to Like/Share, choose "Show transcript", copy all the text, and paste it into the Text tab.');
+}
 
-    async function summarise() {
-        hideError();
+function setLoading(msg) {
+    document.getElementById('loadingText').textContent = msg;
+}
 
-        const apiKey = document.getElementById('apiKey').value.trim();
-        if (!apiKey) {
-            showError('Please enter your Groq API key above and hit Save. <a href="https://console.groq.com/keys" target="_blank">Get one free here →</a>');
+// ── Summarise ────────────────────────────────────────────────────────────────
+
+async function summarise() {
+    hideError();
+
+    const apiKey = document.getElementById('apiKey').value.trim();
+    if (!apiKey) {
+        showError('Please enter your Groq API key above and hit Save. <a href="https://console.groq.com/keys" target="_blank">Get one free here →</a>');
+        return;
+    }
+
+    let inputText = '';
+    const sourceType = currentTab;
+
+    if (currentTab === 'text') {
+        inputText = document.getElementById('textInput').value.trim();
+        if (!inputText) { showError('Please paste some text first.'); return; }
+
+    } else if (currentTab === 'pdf') {
+        if (!pdfText) { showError('Please upload a PDF first.'); return; }
+        inputText = pdfText;
+
+    } else {
+        const url = document.getElementById('youtubeUrl').value.trim();
+        if (!url) { showError('Please enter a YouTube URL.'); return; }
+        showOutput();
+        try {
+            inputText = await getYouTubeTranscript(url);
+        } catch (err) {
+            document.getElementById('outputCard').classList.remove('show');
+            showError(err.message);
             return;
         }
-
-        let inputText = '';
-        let sourceType = currentTab;
-
-        if (currentTab === 'text') {
-            inputText = document.getElementById('textInput').value.trim();
-            if (!inputText) { showError('Please paste some text first.'); return; }
-        } else if (currentTab === 'pdf') {
-            if (!pdfText) { showError('Please upload a PDF first.'); return; }
-            inputText = pdfText;
-        } else {
-            const url = document.getElementById('youtubeUrl').value.trim();
-            if (!url) { showError('Please enter a YouTube URL.'); return; }
-            document.getElementById('outputCard').classList.add('visible');
-            document.getElementById('loading').style.display = 'block';
-            document.getElementById('result').style.display = 'none';
-            try { inputText = await fetchYouTubeTranscript(url); } catch (err) {
-                document.getElementById('outputCard').classList.remove('visible');
-                showError(err.message); return;
-            }
-        }
-
-        document.getElementById('outputCard').classList.add('visible');
-        document.getElementById('loading').style.display = 'block';
-        document.getElementById('result').style.display = 'none';
-        setLoadingText('Summarising...');
-        document.getElementById('summariseBtn').disabled = true;
-
-        const prompt = `You are a study assistant helping a student revise. Analyse the content below and return ONLY a valid JSON object — no markdown, no code blocks, no extra text before or after.
-
-Rules for the JSON:
-- Use only double quotes for strings
-- Do not use apostrophes or single quotes inside string values — reword to avoid them
-- Do not include newlines inside string values
-- title: a short 4-6 word title describing what this content is about (e.g. "The Water Cycle", "World War 2 Causes", "Photosynthesis and Respiration")
-- summary: 6-10 concise bullet points covering the main ideas
-- keyTerms: 5-10 key vocabulary words or concepts (just the terms)
-- flashcards: 6-8 Q&A pairs testing the most important points from the content
-- studyTips: exactly 3 study methods that fit this specific content (e.g. mind mapping, practice questions, spaced repetition, teach-back, active recall, concept mapping, timeline review). Choose methods that suit the content type. Each needs a relevant emoji icon.
-
-JSON format:
-{"title": "...", "summary": [...], "keyTerms": [...], "flashcards": [...], "studyTips": [...]}
-
-Content to analyse:
-${inputText.slice(0, 15000)}`;
-
-        try {
-            const response = await fetch('https://nameless-dream-aa2a.maxwilliamfoster.workers.dev/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${apiKey}`,
-                },
-                body: JSON.stringify({
-                    model: 'llama-3.1-8b-instant',
-                    messages: [{ role: 'user', content: prompt }],
-                    max_tokens: 2048
-                })
-            });
-
-            if (!response.ok) {
-                const err = await response.json().catch(() => ({}));
-                if (response.status === 401) throw new Error('Invalid API key — double-check and save it again.');
-                throw new Error(err.error?.message || `API error (${response.status})`);
-            }
-
-            const data = await response.json();
-            const raw = data.choices[0].message.content;
-            const jsonMatch = raw.match(/\{[\s\S]*\}/);
-            if (!jsonMatch) throw new Error('Unexpected response. Please try again.');
-            let parsed;
-            try {
-                parsed = JSON.parse(jsonMatch[0]);
-            } catch {
-                // Strip any unescaped control characters and retry
-                const cleaned = jsonMatch[0].replace(/[ -]/g, ' ');
-                parsed = JSON.parse(cleaned);
-            }
-
-            renderResult(parsed);
-            saveToHistory(inputText, parsed, sourceType);
-
-        } catch (err) {
-            document.getElementById('outputCard').classList.remove('visible');
-            showError('Error: ' + err.message);
-        } finally {
-            document.getElementById('summariseBtn').disabled = false;
-        }
     }
 
-    // ─── Render result ───────────────────────────────────────────────────────────
+    showOutput();
+    document.getElementById('summariseBtn').disabled = true;
 
-    function renderResult(parsed) {
-        // Title
-        document.getElementById('resultTitle').textContent = parsed.title || 'Summary';
+    const prompt = 'You are a study assistant helping a student revise. Analyse the content below and return ONLY a valid JSON object with no markdown, no code fences, no extra text.\n\nJSON format: {"title": "short 4-6 word title", "summary": ["point 1", ...], "keyTerms": ["term1", ...], "flashcards": [{"q": "question", "a": "answer"}, ...], "studyTips": [{"icon": "emoji", "title": "method", "desc": "explanation"}, ...]}\n\nRules:\n- Use only double quotes. Do not include apostrophes inside strings - reword to avoid them.\n- title: 4-6 word description of the topic\n- summary: 6-10 bullet points\n- keyTerms: 5-10 key vocabulary terms\n- flashcards: 6-8 Q&A pairs\n- studyTips: exactly 3 tailored study methods with emoji icon\n\nContent:\n' + inputText.slice(0, 15000);
 
-        // Summary
-        document.getElementById('summaryList').innerHTML =
-            parsed.summary.map(s => `<li><span class="bullet">›</span><span>${s}</span></li>`).join('');
-
-        // Key terms
-        document.getElementById('termsGrid').innerHTML =
-            parsed.keyTerms.map(t => `<span class="term-chip">${t}</span>`).join('');
-
-        // Flashcards
-        flashcards = parsed.flashcards || [];
-        fcIndex = 0;
-        renderFlashcard();
-
-        // Study tips
-        document.getElementById('studyTipsGrid').innerHTML =
-            (parsed.studyTips || []).map(tip => `
-                <div class="study-tip-card">
-                    <div class="tip-icon">${tip.icon}</div>
-                    <div class="tip-title">${tip.title}</div>
-                    <div class="tip-desc">${tip.desc}</div>
-                </div>`).join('');
-
-        document.getElementById('loading').style.display = 'none';
-        document.getElementById('result').style.display = 'block';
-    }
-
-    // ─── Flashcards ──────────────────────────────────────────────────────────────
-
-    function renderFlashcard() {
-        if (!flashcards.length) return;
-        const card = flashcards[fcIndex];
-        document.getElementById('fcQuestion').textContent = card.q;
-        document.getElementById('fcAnswer').textContent = card.a;
-        document.getElementById('fcCounter').textContent = `${fcIndex + 1} / ${flashcards.length}`;
-        document.getElementById('fcPrev').disabled = fcIndex === 0;
-        document.getElementById('fcNext').disabled = fcIndex === flashcards.length - 1;
-        document.getElementById('flashcard').classList.remove('flipped');
-    }
-
-    function flipCard() {
-        document.getElementById('flashcard').classList.toggle('flipped');
-    }
-
-    function fcNavigate(dir) {
-        fcIndex = Math.max(0, Math.min(flashcards.length - 1, fcIndex + dir));
-        renderFlashcard();
-    }
-
-    // ─── Copy summary ────────────────────────────────────────────────────────────
-
-    function copySummary() {
-        const items = document.querySelectorAll('#summaryList li span:last-child');
-        const text = Array.from(items).map(el => '• ' + el.textContent).join('\n');
-        navigator.clipboard.writeText(text).then(() => {
-            const btn = document.querySelector('.copy-btn');
-            btn.textContent = 'Copied!';
-            setTimeout(() => btn.textContent = 'Copy', 2000);
+    try {
+        const res = await fetch('https://nameless-dream-aa2a.maxwilliamfoster.workers.dev/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + apiKey,
+            },
+            body: JSON.stringify({
+                model: 'llama-3.1-8b-instant',
+                messages: [{ role: 'user', content: prompt }],
+                max_tokens: 2048
+            })
         });
+
+        if (!res.ok) {
+            const err = await res.json().catch(() => ({}));
+            if (res.status === 401) throw new Error('Invalid API key — double-check and save it again.');
+            throw new Error((err.error && err.error.message) || ('API error ' + res.status));
+        }
+
+        const data = await res.json();
+        const raw = data.choices[0].message.content;
+
+        const match = raw.match(/\{[\s\S]*\}/);
+        if (!match) throw new Error('Unexpected response — please try again.');
+
+        const parsed = JSON.parse(match[0]);
+        renderResult(parsed);
+        saveToHistory(parsed, sourceType);
+
+    } catch (err) {
+        document.getElementById('outputCard').classList.remove('show');
+        showError('Error: ' + err.message);
+    } finally {
+        document.getElementById('summariseBtn').disabled = false;
     }
+}
 
-    // ─── History ─────────────────────────────────────────────────────────────────
+function showOutput() {
+    document.getElementById('outputCard').classList.add('show');
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('result').style.display = 'none';
+    setLoading('Summarising...');
+}
 
-    function getHistory() {
-        try { return JSON.parse(localStorage.getItem('summariser_history') || '[]'); } catch { return []; }
-    }
+// ── Render ───────────────────────────────────────────────────────────────────
 
-    function saveToHistory(inputText, parsed, sourceType) {
-        const history = getHistory();
-        const entry = {
-            id: Date.now(),
-            date: new Date().toISOString(),
-            sourceType,
-            title: parsed.title || 'Untitled Summary',
-            result: parsed
-        };
-        history.unshift(entry);
-        if (history.length > 30) history.splice(30);
-        localStorage.setItem('summariser_history', JSON.stringify(history));
-        renderHistory();
-    }
+function renderResult(parsed) {
+    document.getElementById('resultTitle').textContent = parsed.title || 'Summary';
 
-    function renderHistory() {
-        const history = getHistory();
-        const section = document.getElementById('historySection');
-        const list = document.getElementById('historyList');
+    document.getElementById('summaryList').innerHTML =
+        (parsed.summary || []).map(s =>
+            '<li><span class="bullet">›</span><span>' + s + '</span></li>'
+        ).join('');
 
-        if (!history.length) { section.style.display = 'none'; return; }
-        section.style.display = 'block';
+    document.getElementById('termsGrid').innerHTML =
+        (parsed.keyTerms || []).map(t =>
+            '<span class="term-chip">' + t + '</span>'
+        ).join('');
 
-        list.innerHTML = history.map(entry => {
-            const date = new Date(entry.date);
-            const dateStr = date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
-                + ' at ' + date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-            const typeLabel = { text: 'Text', pdf: 'PDF', youtube: 'YouTube' }[entry.sourceType] || 'Text';
-            const typeIcon = { text: '📝', pdf: '📄', youtube: '▶' }[entry.sourceType] || '📝';
-            return `
-                <div class="history-item" onclick="loadHistory(${entry.id})">
-                    <div style="font-size:1.3rem;flex-shrink:0">${typeIcon}</div>
-                    <div class="history-meta">
-                        <div class="history-preview">${entry.title}</div>
-                        <div class="history-date">${typeLabel} · ${dateStr}</div>
-                    </div>
-                    <button class="history-delete" onclick="deleteHistory(event, ${entry.id})" title="Delete">✕</button>
-                </div>`;
-        }).join('');
-    }
+    flashcards = parsed.flashcards || [];
+    fcIndex = 0;
+    renderCard();
 
-    function clearAllHistory() {
-        if (!confirm('Delete all saved summaries?')) return;
-        localStorage.removeItem('summariser_history');
-        renderHistory();
-    }
+    document.getElementById('studyTipsGrid').innerHTML =
+        (parsed.studyTips || []).map(tip =>
+            '<div class="study-tip-card"><div class="tip-icon">' + tip.icon + '</div><div class="tip-title">' + tip.title + '</div><div class="tip-desc">' + tip.desc + '</div></div>'
+        ).join('');
 
-    function loadHistory(id) {
-        const entry = getHistory().find(e => e.id === id);
-        if (!entry) return;
-        renderResult(entry.result);
-        document.getElementById('outputCard').classList.add('visible');
-        window.scrollTo({ top: document.getElementById('outputCard').offsetTop - 20, behavior: 'smooth' });
-    }
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('result').style.display = 'block';
+}
 
-    function deleteHistory(e, id) {
-        e.stopPropagation();
-        const history = getHistory().filter(entry => entry.id !== id);
-        localStorage.setItem('summariser_history', JSON.stringify(history));
-        renderHistory();
-    }
+// ── Flashcards ────────────────────────────────────────────────────────────────
 
-    function toggleHistory() {
-        const list = document.getElementById('historyList');
-        const toggle = document.getElementById('historyToggle');
-        const open = list.classList.toggle('open');
-        toggle.classList.toggle('open', open);
-    }
+function renderCard() {
+    if (!flashcards.length) return;
+    const card = flashcards[fcIndex];
+    document.getElementById('fcQuestion').textContent = card.q;
+    document.getElementById('fcAnswer').textContent = card.a;
+    document.getElementById('fcCounter').textContent = (fcIndex + 1) + ' / ' + flashcards.length;
+    document.getElementById('fcPrev').disabled = fcIndex === 0;
+    document.getElementById('fcNext').disabled = fcIndex === flashcards.length - 1;
+    document.getElementById('flashcard').classList.remove('flipped');
+}
+
+function navigate(dir) {
+    fcIndex = Math.max(0, Math.min(flashcards.length - 1, fcIndex + dir));
+    renderCard();
+}
+
+// ── History ───────────────────────────────────────────────────────────────────
+
+function getHistory() {
+    try { return JSON.parse(localStorage.getItem('summariser_history') || '[]'); } catch { return []; }
+}
+
+function saveToHistory(parsed, sourceType) {
+    const history = getHistory();
+    history.unshift({
+        id: Date.now(),
+        date: new Date().toISOString(),
+        sourceType: sourceType,
+        title: parsed.title || 'Untitled Summary',
+        result: parsed
+    });
+    if (history.length > 30) history.length = 30;
+    localStorage.setItem('summariser_history', JSON.stringify(history));
+    renderHistory();
+}
+
+function renderHistory() {
+    const history = getHistory();
+    const section = document.getElementById('historySection');
+    const list = document.getElementById('historyList');
+
+    if (!history.length) { section.classList.remove('show'); return; }
+    section.classList.add('show');
+
+    const icons = { text: '📝', pdf: '📄', youtube: '▶' };
+    const labels = { text: 'Text', pdf: 'PDF', youtube: 'YouTube' };
+
+    list.innerHTML = history.map(entry => {
+        const d = new Date(entry.date);
+        const dateStr = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+            + ' at ' + d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+        const icon = icons[entry.sourceType] || '📝';
+        const label = labels[entry.sourceType] || 'Text';
+        return '<div class="history-item" data-id="' + entry.id + '">'
+            + '<div style="font-size:1.3rem;flex-shrink:0">' + icon + '</div>'
+            + '<div class="history-meta">'
+            + '<div class="history-name">' + entry.title + '</div>'
+            + '<div class="history-date">' + label + ' · ' + dateStr + '</div>'
+            + '</div>'
+            + '<button class="history-del" data-del="' + entry.id + '" title="Delete">✕</button>'
+            + '</div>';
+    }).join('');
+
+    list.querySelectorAll('.history-item').forEach(el => {
+        el.addEventListener('click', () => loadHistoryEntry(parseInt(el.dataset.id)));
+    });
+
+    list.querySelectorAll('.history-del').forEach(btn => {
+        btn.addEventListener('click', e => {
+            e.stopPropagation();
+            deleteHistoryEntry(parseInt(btn.dataset.del));
+        });
+    });
+}
+
+function loadHistoryEntry(id) {
+    const entry = getHistory().find(e => e.id === id);
+    if (!entry) return;
+    renderResult(entry.result);
+    document.getElementById('outputCard').classList.add('show');
+    document.getElementById('outputCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function deleteHistoryEntry(id) {
+    const history = getHistory().filter(e => e.id !== id);
+    localStorage.setItem('summariser_history', JSON.stringify(history));
+    renderHistory();
+}
 </script>
 </body>
 </html>
