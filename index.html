@@ -654,70 +654,21 @@ function getVideoId(url) {
     return m ? m[1] : null;
 }
 
-async function tryFetch(url) {
-    const proxies = [
-        'https://corsproxy.io/?' + encodeURIComponent(url),
-        'https://api.allorigins.win/raw?url=' + encodeURIComponent(url),
-        'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(url),
-    ];
-    for (const p of proxies) {
-        try {
-            const res = await fetch(p);
-            if (res.ok) return res;
-        } catch {}
-    }
-    return null;
-}
-
 async function getYouTubeTranscript(url) {
     const videoId = getVideoId(url);
     if (!videoId) throw new Error('Invalid YouTube URL — please check the link.');
 
     setLoading('Fetching transcript...');
 
-    // Try fetching the page and extracting caption tracks
-    const pageRes = await tryFetch('https://www.youtube.com/watch?v=' + videoId);
-    if (pageRes) {
-        try {
-            const html = await pageRes.text();
-            const match = html.match(/ytInitialPlayerResponse\s*=\s*(\{.+?\})\s*;/s);
-            if (match) {
-                const playerData = JSON.parse(match[1]);
-                const tracks = playerData?.captions?.playerCaptionsTracklistRenderer?.captionTracks;
-                if (tracks && tracks.length) {
-                    setLoading('Downloading captions...');
-                    const track = tracks.find(t => t.languageCode === 'en') || tracks[0];
-                    const capRes = await tryFetch(track.baseUrl + '&fmt=json3');
-                    if (capRes) {
-                        const data = await capRes.json();
-                        const text = data.events
-                            .filter(e => e.segs)
-                            .flatMap(e => e.segs.map(s => s.utf8))
-                            .join(' ').replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
-                        if (text) return text;
-                    }
-                }
-            }
-        } catch {}
+    const res = await fetch('https://nameless-dream-aa2a.maxwilliamfoster.workers.dev/?transcript=' + videoId);
+    const data = await res.json();
+
+    if (!res.ok || data.error) {
+        throw new Error(data.error || 'Could not get transcript. Try pasting it manually in the Text tab.');
     }
 
-    // Fallback: try timedtext API directly
-    setLoading('Trying alternate method...');
-    const timedRes = await tryFetch('https://www.youtube.com/api/timedtext?v=' + videoId + '&lang=en&fmt=json3');
-    if (timedRes) {
-        try {
-            const data = await timedRes.json();
-            if (data && data.events) {
-                const text = data.events
-                    .filter(e => e.segs)
-                    .flatMap(e => e.segs.map(s => s.utf8))
-                    .join(' ').replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
-                if (text) return text;
-            }
-        } catch {}
-    }
-
-    throw new Error('Could not get the transcript automatically. On YouTube, click the three dots next to Like/Share, choose "Show transcript", copy all the text, and paste it into the Text tab.');
+    if (!data.transcript) throw new Error('Transcript was empty. Try pasting it manually in the Text tab.');
+    return data.transcript;
 }
 
 function setLoading(msg) {
