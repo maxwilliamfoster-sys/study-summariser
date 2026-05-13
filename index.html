@@ -724,17 +724,12 @@
         setLoadingText('Summarising...');
         document.getElementById('summariseBtn').disabled = true;
 
-        const prompt = `You are a study assistant helping a student revise. Analyse the content below and return ONLY valid JSON — no other text.
+        const prompt = `You are a study assistant helping a student revise. Analyse the content below and return ONLY a valid JSON object — no markdown, no code blocks, no extra text before or after.
 
-JSON format:
-{
-  "summary": ["point 1", "point 2", ...],
-  "keyTerms": ["term1", "term2", ...],
-  "flashcards": [{"q": "question", "a": "answer"}, ...],
-  "studyTips": [{"icon": "emoji", "title": "method name", "desc": "1-2 sentence explanation tailored to this content"}]
-}
-
-Rules:
+Rules for the JSON:
+- Use only double quotes for strings
+- Do not use apostrophes or single quotes inside string values — reword to avoid them
+- Do not include newlines inside string values
 - summary: 6-10 concise bullet points covering the main ideas
 - keyTerms: 5-10 key vocabulary words or concepts (just the terms)
 - flashcards: 6-8 Q&A pairs testing the most important points from the content
@@ -767,7 +762,14 @@ ${inputText.slice(0, 15000)}`;
             const raw = data.choices[0].message.content;
             const jsonMatch = raw.match(/\{[\s\S]*\}/);
             if (!jsonMatch) throw new Error('Unexpected response. Please try again.');
-            const parsed = JSON.parse(jsonMatch[0]);
+            let parsed;
+            try {
+                parsed = JSON.parse(jsonMatch[0]);
+            } catch {
+                // Strip any unescaped control characters and retry
+                const cleaned = jsonMatch[0].replace(/[ -]/g, ' ');
+                parsed = JSON.parse(cleaned);
+            }
 
             renderResult(parsed);
             saveToHistory(inputText, parsed, sourceType);
