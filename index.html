@@ -491,6 +491,8 @@
         </div>
 
         <div id="result" style="display:none">
+            <!-- Title -->
+            <div id="resultTitle" style="font-size:1.2rem;font-weight:700;color:#e2e8f0;margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:1px solid #2d3748;"></div>
             <!-- Summary -->
             <div class="section-label">
                 Summary
@@ -537,11 +539,11 @@
 
     <!-- History -->
     <div class="history-section" id="historySection" style="display:none">
-        <div class="history-header" onclick="toggleHistory()">
-            <span class="history-title">📚 Past Summaries</span>
-            <span class="history-toggle" id="historyToggle">▼</span>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+            <h2 style="font-size:1.1rem;font-weight:700;color:#e2e8f0;">📚 Saved Summaries</h2>
+            <button class="btn-small" onclick="clearAllHistory()" style="background:#1e2337;color:#f87171;font-size:0.75rem;padding:0.3rem 0.7rem;">Clear all</button>
         </div>
-        <div class="history-list" id="historyList"></div>
+        <div id="historyList"></div>
     </div>
 </div>
 
@@ -730,10 +732,14 @@ Rules for the JSON:
 - Use only double quotes for strings
 - Do not use apostrophes or single quotes inside string values — reword to avoid them
 - Do not include newlines inside string values
+- title: a short 4-6 word title describing what this content is about (e.g. "The Water Cycle", "World War 2 Causes", "Photosynthesis and Respiration")
 - summary: 6-10 concise bullet points covering the main ideas
 - keyTerms: 5-10 key vocabulary words or concepts (just the terms)
 - flashcards: 6-8 Q&A pairs testing the most important points from the content
 - studyTips: exactly 3 study methods that fit this specific content (e.g. mind mapping, practice questions, spaced repetition, teach-back, active recall, concept mapping, timeline review). Choose methods that suit the content type. Each needs a relevant emoji icon.
+
+JSON format:
+{"title": "...", "summary": [...], "keyTerms": [...], "flashcards": [...], "studyTips": [...]}
 
 Content to analyse:
 ${inputText.slice(0, 15000)}`;
@@ -785,6 +791,9 @@ ${inputText.slice(0, 15000)}`;
     // ─── Render result ───────────────────────────────────────────────────────────
 
     function renderResult(parsed) {
+        // Title
+        document.getElementById('resultTitle').textContent = parsed.title || 'Summary';
+
         // Summary
         document.getElementById('summaryList').innerHTML =
             parsed.summary.map(s => `<li><span class="bullet">›</span><span>${s}</span></li>`).join('');
@@ -857,7 +866,7 @@ ${inputText.slice(0, 15000)}`;
             id: Date.now(),
             date: new Date().toISOString(),
             sourceType,
-            preview: inputText.slice(0, 120).replace(/\s+/g, ' '),
+            title: parsed.title || 'Untitled Summary',
             result: parsed
         };
         history.unshift(entry);
@@ -874,22 +883,28 @@ ${inputText.slice(0, 15000)}`;
         if (!history.length) { section.style.display = 'none'; return; }
         section.style.display = 'block';
 
-        list.innerHTML = history.length === 0
-            ? '<div class="history-empty">No past summaries yet.</div>'
-            : history.map(entry => {
-                const date = new Date(entry.date);
-                const dateStr = date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-                const typeLabel = { text: 'Text', pdf: 'PDF', youtube: 'YouTube' }[entry.sourceType] || 'Text';
-                return `
-                    <div class="history-item" onclick="loadHistory(${entry.id})">
-                        <div class="history-meta">
-                            <div class="history-preview">${entry.preview}...</div>
-                            <div class="history-date">${dateStr}</div>
-                        </div>
-                        <span class="history-type">${typeLabel}</span>
-                        <button class="history-delete" onclick="deleteHistory(event, ${entry.id})" title="Delete">✕</button>
-                    </div>`;
-            }).join('');
+        list.innerHTML = history.map(entry => {
+            const date = new Date(entry.date);
+            const dateStr = date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+                + ' at ' + date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+            const typeLabel = { text: 'Text', pdf: 'PDF', youtube: 'YouTube' }[entry.sourceType] || 'Text';
+            const typeIcon = { text: '📝', pdf: '📄', youtube: '▶' }[entry.sourceType] || '📝';
+            return `
+                <div class="history-item" onclick="loadHistory(${entry.id})">
+                    <div style="font-size:1.3rem;flex-shrink:0">${typeIcon}</div>
+                    <div class="history-meta">
+                        <div class="history-preview">${entry.title}</div>
+                        <div class="history-date">${typeLabel} · ${dateStr}</div>
+                    </div>
+                    <button class="history-delete" onclick="deleteHistory(event, ${entry.id})" title="Delete">✕</button>
+                </div>`;
+        }).join('');
+    }
+
+    function clearAllHistory() {
+        if (!confirm('Delete all saved summaries?')) return;
+        localStorage.removeItem('summariser_history');
+        renderHistory();
     }
 
     function loadHistory(id) {
