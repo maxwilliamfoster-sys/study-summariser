@@ -640,43 +640,72 @@
         return m ? m[1] : null;
     }
 
+    const PROXIES = [
+        url => 'https://corsproxy.io/?' + encodeURIComponent(url),
+        url => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url),
+        url => 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(url),
+    ];
+
+    async function fetchWithFallback(targetUrl) {
+        for (const proxy of PROXIES) {
+            try {
+                const res = await fetch(proxy(targetUrl));
+                if (res.ok) return res;
+            } catch {}
+        }
+        return null;
+    }
+
     async function fetchYouTubeTranscript(url) {
         const videoId = extractVideoId(url);
         if (!videoId) throw new Error('Invalid YouTube URL — please check the link.');
 
+        // Method 1: fetch YouTube page and extract caption track list
         setLoadingText('Fetching video transcript...');
-        const proxy = 'https://corsproxy.io/?' + encodeURIComponent(`https://www.youtube.com/watch?v=${videoId}`);
+        let tracks = null;
 
-        let html;
-        try {
-            const res = await fetch(proxy);
-            if (!res.ok) throw new Error();
-            html = await res.text();
-        } catch {
-            throw new Error('Could not reach the video. Try copying the transcript from YouTube and pasting it in the Text tab.');
+        const pageRes = await fetchWithFallback(`https://www.youtube.com/watch?v=${videoId}`);
+        if (pageRes) {
+            try {
+                const html = await pageRes.text();
+                const match = html.match(/ytInitialPlayerResponse\s*=\s*(\{.+?\})\s*;/s);
+                if (match) {
+                    const playerData = JSON.parse(match[1]);
+                    tracks = playerData?.captions?.playerCaptionsTracklistRenderer?.captionTracks;
+                }
+            } catch {}
         }
 
-        const match = html.match(/ytInitialPlayerResponse\s*=\s*(\{.+?\})\s*;/s);
-        if (!match) throw new Error('Could not read video data. The video may be private or region-locked.');
+        // Method 2: try YouTube timedtext API directly if we couldn't get tracks
+        if (!tracks?.length) {
+            setLoadingText('Trying alternative transcript method...');
+            try {
+                const timedRes = await fetchWithFallback(
+                    `https://www.youtube.com/api/timedtext?v=${videoId}&lang=en&fmt=json3`
+                );
+                if (timedRes) {
+                    const data = await timedRes.json();
+                    if (data?.events?.length) {
+                        const text = data.events
+                            .filter(e => e.segs)
+                            .flatMap(e => e.segs.map(s => s.utf8))
+                            .join(' ').replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
+                        if (text) return text;
+                    }
+                }
+            } catch {}
 
-        let playerData;
-        try { playerData = JSON.parse(match[1]); } catch { throw new Error('Could not parse video data.'); }
+            throw new Error('Could not get transcript automatically. On YouTube, click the three dots next to Like/Share, choose "Show transcript", copy the text, and paste it in the Text tab.');
+        }
 
-        const tracks = playerData?.captions?.playerCaptionsTracklistRenderer?.captionTracks;
-        if (!tracks?.length) throw new Error('This video has no captions. Copy the transcript from YouTube and paste it in the Text tab.');
-
-        const track = tracks.find(t => t.languageCode === 'en') || tracks[0];
+        // Download the caption track
         setLoadingText('Downloading captions...');
+        const track = tracks.find(t => t.languageCode === 'en') || tracks[0];
+        const captionRes = await fetchWithFallback(track.baseUrl + '&fmt=json3');
 
-        let transcriptData;
-        try {
-            const tRes = await fetch('https://corsproxy.io/?' + encodeURIComponent(track.baseUrl + '&fmt=json3'));
-            if (!tRes.ok) throw new Error();
-            transcriptData = await tRes.json();
-        } catch {
-            throw new Error('Could not download the transcript. Try pasting it manually instead.');
-        }
+        if (!captionRes) throw new Error('Could not download captions. Try pasting the transcript manually in the Text tab.');
 
+        const transcriptData = await captionRes.json();
         const text = transcriptData.events
             .filter(e => e.segs)
             .flatMap(e => e.segs.map(s => s.utf8))
