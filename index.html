@@ -458,8 +458,21 @@
         </div>
 
         <div class="tab-pane" id="pane-youtube">
-            <input class="url-input" type="text" id="youtubeUrl" placeholder="https://www.youtube.com/watch?v=..." />
-            <p class="hint">Works with videos that have captions. If it fails, copy the transcript from YouTube and paste it in the Text tab.</p>
+            <div style="display:flex;gap:0.5rem;margin-bottom:1rem;">
+                <input class="url-input" type="text" id="youtubeUrl" placeholder="https://www.youtube.com/watch?v=..." style="flex:1" />
+                <button class="btn-small" id="openVideoBtn">Open video</button>
+            </div>
+            <div style="background:#111827;border:1px solid #1f2937;border-radius:10px;padding:1rem;margin-bottom:1rem;">
+                <div style="font-size:0.8rem;font-weight:700;color:#a5b4fc;margin-bottom:0.6rem;">How to get the transcript:</div>
+                <div style="font-size:0.82rem;color:#64748b;line-height:1.8;">
+                    1. Paste the URL above and click <strong style="color:#94a3b8">Open video</strong><br>
+                    2. Under the video, click the <strong style="color:#94a3b8">three dots ···</strong> next to Like / Share<br>
+                    3. Click <strong style="color:#94a3b8">Show transcript</strong><br>
+                    4. Select all the text in the transcript panel and copy it<br>
+                    5. Paste it in the box below and hit Summarise
+                </div>
+            </div>
+            <textarea id="youtubeTranscript" placeholder="Paste the transcript here..." style="min-height:120px"></textarea>
         </div>
 
         <button class="btn-main" id="summariseBtn">✦ Summarise</button>
@@ -604,6 +617,9 @@ function bindEvents() {
         });
     });
 
+    // Open video button
+    document.getElementById('openVideoBtn').addEventListener('click', openVideo);
+
     // Clear history
     document.getElementById('clearBtn').addEventListener('click', () => {
         if (confirm('Delete all saved summaries?')) {
@@ -654,21 +670,12 @@ function getVideoId(url) {
     return m ? m[1] : null;
 }
 
-async function getYouTubeTranscript(url) {
+function openVideo() {
+    const url = document.getElementById('youtubeUrl').value.trim();
+    if (!url) { showError('Please paste a YouTube URL first.'); return; }
     const videoId = getVideoId(url);
-    if (!videoId) throw new Error('Invalid YouTube URL — please check the link.');
-
-    setLoading('Fetching transcript...');
-
-    const res = await fetch('https://nameless-dream-aa2a.maxwilliamfoster.workers.dev/?transcript=' + videoId);
-    const data = await res.json();
-
-    if (!res.ok || data.error) {
-        throw new Error(data.error || 'Could not get transcript. Try pasting it manually in the Text tab.');
-    }
-
-    if (!data.transcript) throw new Error('Transcript was empty. Try pasting it manually in the Text tab.');
-    return data.transcript;
+    if (!videoId) { showError('Invalid YouTube URL — please check the link.'); return; }
+    window.open('https://www.youtube.com/watch?v=' + videoId, '_blank');
 }
 
 function setLoading(msg) {
@@ -698,16 +705,8 @@ async function summarise() {
         inputText = pdfText;
 
     } else {
-        const url = document.getElementById('youtubeUrl').value.trim();
-        if (!url) { showError('Please enter a YouTube URL.'); return; }
-        showOutput();
-        try {
-            inputText = await getYouTubeTranscript(url);
-        } catch (err) {
-            document.getElementById('outputCard').classList.remove('show');
-            showError(err.message);
-            return;
-        }
+        inputText = document.getElementById('youtubeTranscript').value.trim();
+        if (!inputText) { showError('Please paste the transcript text in the box first.'); return; }
     }
 
     showOutput();
